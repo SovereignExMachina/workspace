@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import WorkSpace, Task, Column
 
-# Create your views here.
+
+def show_workspace(request):
+    ...

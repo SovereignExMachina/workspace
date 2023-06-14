@@ -9,11 +9,13 @@ class WorkSpace(models.Model):
     # Колонки со статусом
     column = models.ManyToManyField(
         'Column', blank=True, verbose_name='Колонка', related_name='columns')
+    create_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     # users = ...  # Пользователи которые участвуют в раб.пространстве
 
     class Meta:
         verbose_name = 'Рабочее пространсво'
         verbose_name_plural = 'Рабочии пространсва'
+        ordering = ['-create_at']
 
     def __str__(self):
         return self.title
@@ -30,6 +32,7 @@ class Column(models.Model):
     class Meta:
         verbose_name = 'Колонка'
         verbose_name_plural = 'Колонки'
+        ordering = ['-title']
 
     def __str__(self):
         return self.title
