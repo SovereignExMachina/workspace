@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('workspace.urls')),
+    path('', include('workspace.urls'), namespace='workspace'),
     path('admin/', admin.site.urls),
 ]
 

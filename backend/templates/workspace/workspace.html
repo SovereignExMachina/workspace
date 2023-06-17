@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% for ws in workspace %}
-        <ul>
-            <li>
-                {{ ws.title }} <br>
-                {{ ws.column.task }}
-            </li>
-        </ul>
-    {% endfor %}    
-</body>
-</html>
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="col-md-10 bg-primary-subtle col">
+        1111
+    </div>
+{% endblock content %}
