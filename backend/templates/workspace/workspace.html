@@ -6,6 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    
+    {% for ws in workspace %}
+        <ul>
+            <li>
+                {{ ws.title }} <br>
+                {{ ws.column.task }}
+            </li>
+        </ul>
+    {% endfor %}    
 </body>
 </html>

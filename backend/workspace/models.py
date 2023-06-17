@@ -24,7 +24,7 @@ class WorkSpace(models.Model):
 # Колонки, с статусом задачи - В работе, принято, не принято и тд.
 class Column(models.Model):
     title = models.CharField(
-        max_length=255, verbose_name='Название пространства')
+        max_length=255, verbose_name='Имя колонки')
     # Здесь будут хранится задачи
     task = models.ManyToManyField(
         'Task', blank=True, verbose_name='Задачи', related_name='tasks')
@@ -50,9 +50,9 @@ class Column(models.Model):
 
 class Task(models.Model):
     title = models.CharField(
-        max_length=255, verbose_name='Название пространства')
+        max_length=255, verbose_name='Имя задачи')
     discription = models.TextField(
-        blank=True, verbose_name='Описание пространства')
+        blank=True, verbose_name='Описание задачи')
     deadline = models.DateField(
         blank=True, verbose_name='Срок выполнения')
     # comment = ...  # Комментарии к задачам
