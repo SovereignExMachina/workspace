@@ -16,7 +16,7 @@
                 <nav class="nav flex-column text-bg-light col-md-2 col">
                     <p class='nav-link text-secondary'>Рабочие пространства:</p>
                     {% for ws in workspace %}
-                        <a class="nav-link active" aria-current="page" href="#">{{ ws }}</a>
+                        <a class="nav-link active" aria-current="page" href="{{ ws.get_absolute_url }}">{{ ws }}</a>
                     {% empty %}
                         <a class="nav-link active" aria-current="page" href="#">Создать</a>
                     {% endfor %}

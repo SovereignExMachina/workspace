@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class WorkSpace(models.Model):
@@ -12,6 +13,9 @@ class WorkSpace(models.Model):
     create_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     # users = ...  # Пользователи которые участвуют в раб.пространстве
 
+    def get_absolute_url(self):
+        return reverse("workspace:ws_detail", kwargs={"ws_id": self.pk})
+    
     class Meta:
         verbose_name = 'Рабочее пространсво'
         verbose_name_plural = 'Рабочии пространсва'
