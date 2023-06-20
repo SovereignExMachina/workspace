@@ -11,8 +11,10 @@ def show_workspace(request):
 
 
 def get_workspace(request, ws_id):
+    ws_all = WorkSpace.objects.all()
     ws = get_object_or_404(WorkSpace, pk=ws_id)
     context = {
         'workspace_item': ws,
+        'workspace': ws_all,
     }
     return render(request, template_name='workspace/workspace_detail.html', context=context)

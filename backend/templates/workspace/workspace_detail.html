@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
     <div class="col-md-10 bg-primary-subtle col">
-        222
-    </div>
+        <h1>{{ workspace_item.title }}</h1>
+        <div class='row'>
+            {% for col in workspace_item.column.all %}
+            <div class="card col-md-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ col.title }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for task in col.task.all %}
+                        <li class="list-group-item">{{ task.title }}</li>                
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
 {% endblock content %}
