@@ -18,3 +18,7 @@ def get_workspace(request, ws_id):
         'workspace': ws_all,
     }
     return render(request, template_name='workspace/workspace_detail.html', context=context)
+
+
+def create_workspace(request):
+    return render(request, template_name='workspace/create_workspace.html')
