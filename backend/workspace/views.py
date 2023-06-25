@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import WorkSpace, Task, Column
+from .forms import WorkSpaceForm
 
 
 def show_workspace(request):
@@ -21,4 +22,11 @@ def get_workspace(request, ws_id):
 
 
 def create_workspace(request):
-    return render(request, template_name='workspace/create_workspace.html')
+    if request.method  == 'POST':
+        form = WorkSpaceForm(request.POST)
+        if form.is_valid():
+            ws = form.save()
+            return redirect(ws)
+    else:
+        form = WorkSpaceForm()
+    return render(request, template_name='workspace/create_workspace.html', context={'ws_form': form})
