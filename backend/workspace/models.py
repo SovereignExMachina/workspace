@@ -14,7 +14,7 @@ class WorkSpace(models.Model):
     # users = ...  # Пользователи которые участвуют в раб.пространстве
 
     def get_absolute_url(self):
-        return reverse("workspace:ws_detail", kwargs={"ws_id": self.pk})
+        return reverse("workspace:ws_detail", kwargs={"pk": self.pk})
     
     class Meta:
         verbose_name = 'Рабочее пространсво'

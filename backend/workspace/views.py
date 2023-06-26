@@ -1,32 +1,48 @@
+from typing import Any, Dict
 from django.shortcuts import redirect, render, get_object_or_404
+from django.views.generic import ListView, DetailView, CreateView, View
 from .models import WorkSpace, Task, Column
-from .forms import WorkSpaceForm
+from .forms import WorkSpaceForm, ColumnForm
 
 
-def show_workspace(request):
-    ws = WorkSpace.objects.all()
-    context = {
-        'workspace': ws,
-    }
-    return render(request, template_name='workspace/workspace.html', context=context)
+class WorkSpaceView(ListView):
+    model = WorkSpace
+    template_name = 'workspace/workspace.html'
+    context_object_name = 'workspaces'
 
 
-def get_workspace(request, ws_id):
-    ws_all = WorkSpace.objects.all()
-    ws = get_object_or_404(WorkSpace, pk=ws_id)
-    context = {
-        'workspace_item': ws,
-        'workspace': ws_all,
-    }
-    return render(request, template_name='workspace/workspace_detail.html', context=context)
+class WorkSpaceDetail(DetailView):
+    model = WorkSpace
+    template_name = 'workspace/workspace_detail.html'
+    context_object_name = 'workspace_item'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['workspaces'] = WorkSpace.objects.all()
+        return context
 
 
-def create_workspace(request):
-    if request.method  == 'POST':
-        form = WorkSpaceForm(request.POST)
+class WorkSpaceCreate(CreateView):
+    form_class = WorkSpaceForm
+    template_name = 'workspace/create_workspace.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['workspaces'] = WorkSpace.objects.all()
+        return context
+
+
+class ColumnCreate(View):
+    def get(self, request, pk):
+        ws = WorkSpace.objects.get(id=pk)
+        form = ColumnForm()
+        return render(request, template_name='workspace/create_column.html', context={'workspace': ws, 'form': form})
+
+    def post(self, request, pk):
+        ws = WorkSpace.objects.get(id=pk)
+        form = ColumnForm(request.POST)
         if form.is_valid():
-            ws = form.save()
-            return redirect(ws)
-    else:
-        form = WorkSpaceForm()
-    return render(request, template_name='workspace/create_workspace.html', context={'ws_form': form})
+            column = form.save()
+            ws.column.add(column)
+            return redirect(ws.get_absolute_url())
+        return render(request, template_name='workspace/create_column.html', context={'workspace': ws, 'form': form})

@@ -16,7 +16,7 @@
             {% block sidebar %}
                 <nav class="nav flex-column text-bg-light col-md-2 col">
                     <p class='nav-link text-secondary'>Рабочие пространства:</p>
-                    {% for ws in workspace %}
+                    {% for ws in workspaces %}
                         <a class="nav-link active" aria-current="page" href="{{ ws.get_absolute_url }}">{{ ws }}</a>
                     {% endfor %}
                     <a class="nav-link active" aria-current="page" href="{% url 'workspace:create_workspace' %}">Создать</a>

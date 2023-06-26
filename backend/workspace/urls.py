@@ -1,11 +1,13 @@
 from django.urls import path
-from .views import show_workspace, get_workspace, create_workspace
+from .views import WorkSpaceView, WorkSpaceDetail, WorkSpaceCreate, ColumnCreate
 
 
 app_name = 'workspace'
 
 urlpatterns = [
-    path('', show_workspace, name='home'),
-    path('workspace/<int:ws_id>/', get_workspace, name='ws_detail'),
-    path('workspace/create/', create_workspace, name='create_workspace'),
+    path('', WorkSpaceView.as_view(), name='home'),
+    path('workspace/<int:pk>/', WorkSpaceDetail.as_view(), name='ws_detail'),
+    path('workspace/create/', WorkSpaceCreate.as_view(), name='create_workspace'),
+    path('workspace/<int:pk>/column/',
+         ColumnCreate.as_view(), name='create_column'),
 ]

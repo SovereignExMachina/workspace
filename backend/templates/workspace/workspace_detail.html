@@ -17,5 +17,8 @@
             </div>
             {% endfor %}
             </div>
+            <div class="row">
+                <a href="{% url 'workspace:create_column' workspace_item.pk %}">Создать</a>
+            </div>
         </div>
 {% endblock content %}
