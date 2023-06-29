@@ -1,5 +1,5 @@
 from django import forms
-from .models import WorkSpace, Column
+from .models import WorkSpace, Column, Task
 
 
 class WorkSpaceForm(forms.ModelForm):
@@ -25,4 +25,19 @@ class ColumnForm(forms.ModelForm):
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
             })
+        }
+
+
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ('title', 'discription', 'deadline')
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'discription': forms.TextInput(attrs={
+                'class': 'form-control',
+                'rows': 5
+            }),
         }

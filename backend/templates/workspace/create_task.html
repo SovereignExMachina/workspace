@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="col-md-10 bg-primary-subtle col">
-        <form action="{% url 'workspace:create_workspace' %}" method='post'>
+        <form action="" method='post'>
             {% csrf_token %}
             <div class="form-group">
                 {{ form.as_p }}

@@ -2,7 +2,7 @@ from typing import Any, Dict
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, View
 from .models import WorkSpace, Task, Column
-from .forms import WorkSpaceForm, ColumnForm
+from .forms import WorkSpaceForm, ColumnForm, TaskForm
 
 
 class WorkSpaceView(ListView):
@@ -46,3 +46,19 @@ class ColumnCreate(View):
             ws.column.add(column)
             return redirect(ws.get_absolute_url())
         return render(request, template_name='workspace/create_column.html', context={'workspace': ws, 'form': form})
+
+
+class TaskCreate(View):
+    def get(self, request, pk):
+        column = Column.objects.get(id=pk)
+        form = TaskForm()
+        return render(request, template_name='workspace/create_task.html', context={'column': column, 'form': form})
+    
+    def post(self, request, pk):
+        column = Column.objects.get(id=pk)
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save()
+            column.task.add(task)
+            return redirect('workspace:home')
+        return render(request, template_name='workspace/create_task.html', context={'column': column, 'form': form})

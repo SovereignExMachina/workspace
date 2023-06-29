@@ -13,6 +13,9 @@
                     {% for task in col.task.all %}
                         <li class="list-group-item">{{ task.title }}</li>                
                     {% endfor %}
+                        <li class="list-group-item">
+                            <a href="{% url 'workspace:create_task' col.pk %}">Добавить</a>
+                        </li> 
                 </ul>
             </div>
             {% endfor %}
