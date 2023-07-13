@@ -13,3 +13,9 @@ class Home(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Главная'
         return context
+
+
+class BoardDetail(DetailView):
+    model = Board
+    template_name = 'board/board_detail.html'
+    context_object_name = 'board'
